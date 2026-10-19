@@ -1,0 +1,11 @@
+node_modules/
+work/
+backups/
+dist/
+logs/
+.env*
+*.asar
+*.exe
+*.log
+*.pem
+*.key
