@@ -9,7 +9,13 @@
     { "selector": "[data-testid=\"sidebar-search-button\"]", "attributes": ["aria-label","title"], "words": { "Search Conversations": "搜索对话" } },
     { "selector": "[data-testid=\"sidebar-toggle\"]", "attributes": ["aria-label","title"], "words": { "Toggle Sidebar": "切换侧边栏" } },
     { "selector": "[data-testid=\"toggle-aux-sidebar\"]", "attributes": ["aria-label","title"], "words": { "Toggle Auxiliary Pane": "切换辅助面板" } },
-    { "selector": "[role=\"tooltip\"]", "words": { "New Conversation": "新建对话", "Conversation History": "对话历史", "Settings": "设置", "Search Conversations": "搜索对话", "Toggle Sidebar": "切换侧边栏", "Go Back": "后退", "Go Forward": "前进", "Toggle Overview Panel": "切换概览面板", "Toggle Auxiliary Pane": "切换辅助面板" } }
+    { "selector": "[data-testid=\"title-menu-bar-item\"]", "words": { "File": "文件", "View": "视图", "Window": "窗口" } },
+    { "selector": "[data-testid=\"title-menu-bar-option\"] > span:first-child", "words": { "About": "关于", "Check for Updates": "检查更新", "New Conversation": "新建对话", "Create Project": "创建项目", "Create Cloud Project": "创建云端项目", "Command Palette": "命令面板", "Toggle Fullscreen": "切换全屏", "Zoom In": "放大", "Zoom Out": "缩小", "Reset Zoom": "重置缩放", "Minimize": "最小化", "Maximize": "最大化", "Close": "关闭" } },
+    { "selector": "[data-testid=\"overview-panel-row-review\"] > span:first-of-type", "words": { "Review": "审阅" } },
+    { "selector": "[data-testid=\"overview-panel-row-files\"] > span:first-of-type", "words": { "Files": "文件" } },
+    { "selector": "[data-testid=\"overview-panel-row-terminal\"] > span:first-of-type", "words": { "Terminal": "终端" } },
+    { "selector": "[data-testid=\"overview-panel-row-plugins\"] > span:first-of-type", "words": { "Plugins": "插件" } },
+    { "selector": "[data-testid=\"overview-panel\"] > div:first-child > div:first-child > span:first-child", "words": { "Overview": "概览" } }
   ],
   "settingsNav": { "General": "常规", "Application": "应用", "App": "应用", "Appearance": "外观", "Models": "模型", "Shortcuts": "快捷键", "Provide Feedback": "提供反馈", "Notifications": "通知", "Permissions": "权限", "Browser": "浏览器", "Customizations": "自定义" },
   "settings": {

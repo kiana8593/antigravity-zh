@@ -82,7 +82,12 @@ function installTranslation(win, spec) {
   function pass() {
     counters.passes++;
     for (const rule of spec.rules) {
-      for (const el of doc.querySelectorAll(rule.selector)) translateElement(el, rule.words, rule.attributes);
+      for (const el of doc.querySelectorAll(rule.selector)) {
+        translateElement(el, rule.words, rule.attributes);
+        const tooltipId = el.getAttribute('data-tooltip-id');
+        const tooltip = tooltipId && doc.getElementById(tooltipId);
+        if (tooltip) translateElement(tooltip, rule.words);
+      }
     }
     const root = settingsRoot();
     if (root) {
