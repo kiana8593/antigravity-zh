@@ -1,35 +1,535 @@
 {
-  "version": "0.1.0-dev.1",
+  "version": "0.1.0-dev.2",
   "rules": [
-    { "selector": "[data-testid=\"new-conversation-button\"],[data-testid=\"app-icon-new-conversation-button\"]", "attributes": ["aria-label","title"], "words": { "New Conversation": "新建对话" } },
-    { "selector": "[data-testid=\"history-button\"]", "words": { "Conversation History": "对话历史" } },
-    { "selector": "[data-testid=\"automations-button\"]", "words": { "Automations": "自动化", "Scheduled Tasks": "定时任务" } },
-    { "selector": "[data-testid=\"settings-button\"],[data-testid=\"mobile-open-settings\"]", "attributes": ["aria-label","title"], "words": { "Settings": "设置" } },
-    { "selector": "nav[aria-label=\"Sidebar\"] a[href$=\"/customizations\"]", "words": { "Customizations": "自定义" } },
-    { "selector": "[data-testid=\"sidebar-search-button\"]", "attributes": ["aria-label","title"], "words": { "Search Conversations": "搜索对话" } },
-    { "selector": "[data-testid=\"sidebar-toggle\"]", "attributes": ["aria-label","title"], "words": { "Toggle Sidebar": "切换侧边栏" } },
-    { "selector": "[data-testid=\"toggle-aux-sidebar\"]", "attributes": ["aria-label","title"], "words": { "Toggle Auxiliary Pane": "切换辅助面板" } },
-    { "selector": "[data-testid=\"title-menu-bar-item\"]", "words": { "File": "文件", "View": "视图", "Window": "窗口" } },
-    { "selector": "[data-testid=\"title-menu-bar-option\"] > span:first-child", "words": { "About": "关于", "Check for Updates": "检查更新", "New Conversation": "新建对话", "Create Project": "创建项目", "Create Cloud Project": "创建云端项目", "Command Palette": "命令面板", "Toggle Fullscreen": "切换全屏", "Zoom In": "放大", "Zoom Out": "缩小", "Reset Zoom": "重置缩放", "Minimize": "最小化", "Maximize": "最大化", "Close": "关闭" } },
-    { "selector": "[data-testid=\"overview-panel-row-review\"] > span:first-of-type", "words": { "Review": "审阅" } },
-    { "selector": "[data-testid=\"overview-panel-row-files\"] > span:first-of-type", "words": { "Files": "文件" } },
-    { "selector": "[data-testid=\"overview-panel-row-terminal\"] > span:first-of-type", "words": { "Terminal": "终端" } },
-    { "selector": "[data-testid=\"overview-panel-row-plugins\"] > span:first-of-type", "words": { "Plugins": "插件" } },
-    { "selector": "[data-testid=\"overview-panel\"] > div:first-child > div:first-child > span:first-child", "words": { "Overview": "概览" } }
+    {
+      "selector": "[data-testid=\"new-conversation-button\"],[data-testid=\"app-icon-new-conversation-button\"]",
+      "attributes": [
+        "aria-label",
+        "title"
+      ],
+      "words": {
+        "New Conversation": "新建对话"
+      }
+    },
+    {
+      "selector": "[data-testid=\"history-button\"]",
+      "words": {
+        "Conversation History": "对话历史"
+      }
+    },
+    {
+      "selector": "[data-testid=\"automations-button\"]",
+      "words": {
+        "Automations": "自动化",
+        "Scheduled Tasks": "定时任务"
+      }
+    },
+    {
+      "selector": "[data-testid=\"settings-button\"],[data-testid=\"mobile-open-settings\"]",
+      "attributes": [
+        "aria-label",
+        "title"
+      ],
+      "words": {
+        "Settings": "设置"
+      }
+    },
+    {
+      "selector": "[aria-label=\"Sidebar\"] a[href*=\"/customizations\"]",
+      "words": {
+        "Customizations": "自定义"
+      }
+    },
+    {
+      "selector": "[data-testid=\"sidebar-search-button\"]",
+      "attributes": [
+        "aria-label",
+        "title"
+      ],
+      "words": {
+        "Search Conversations": "搜索对话"
+      }
+    },
+    {
+      "selector": "[data-testid=\"sidebar-toggle\"]",
+      "attributes": [
+        "aria-label",
+        "title"
+      ],
+      "words": {
+        "Toggle Sidebar": "切换侧边栏"
+      }
+    },
+    {
+      "selector": "[data-testid=\"toggle-aux-sidebar\"]",
+      "attributes": [
+        "aria-label",
+        "title"
+      ],
+      "words": {
+        "Toggle Auxiliary Pane": "切换辅助面板"
+      }
+    },
+    {
+      "selector": "[data-testid=\"title-menu-bar-item\"]",
+      "words": {
+        "File": "文件",
+        "View": "视图",
+        "Window": "窗口"
+      }
+    },
+    {
+      "selector": "[data-testid=\"title-menu-bar-option\"] > span:first-child",
+      "words": {
+        "About": "关于",
+        "Check for Updates": "检查更新",
+        "New Conversation": "新建对话",
+        "Create Project": "创建项目",
+        "Create Cloud Project": "创建云端项目",
+        "Command Palette": "命令面板",
+        "Toggle Fullscreen": "切换全屏",
+        "Zoom In": "放大",
+        "Zoom Out": "缩小",
+        "Reset Zoom": "重置缩放",
+        "Minimize": "最小化",
+        "Maximize": "最大化",
+        "Close": "关闭"
+      }
+    },
+    {
+      "selector": "[data-testid=\"overview-panel-row-review\"] > span:first-of-type",
+      "words": {
+        "Review": "审阅"
+      }
+    },
+    {
+      "selector": "[data-testid=\"overview-panel-row-files\"] > span:first-of-type",
+      "words": {
+        "Files": "文件"
+      }
+    },
+    {
+      "selector": "[data-testid=\"overview-panel-row-terminal\"] > span:first-of-type",
+      "words": {
+        "Terminal": "终端"
+      }
+    },
+    {
+      "selector": "[data-testid=\"overview-panel-row-plugins\"] > span:first-of-type",
+      "words": {
+        "Plugins": "插件"
+      }
+    },
+    {
+      "selector": "[data-testid=\"overview-panel\"] > div:first-child > div:first-child > span:first-child",
+      "words": {
+        "Overview": "概览"
+      }
+    },
+    {
+      "selector": "[aria-label=\"Sidebar\"] [data-sidebar-section-drop-id=\"main-section-header\"] [data-testid=\"section-header\"] h2,[aria-label=\"Sidebar\"] [data-sidebar-section-drop-id=\"all\"] [data-testid=\"section-header\"] h2,[aria-label=\"Sidebar\"] [data-sidebar-section-drop-id=\"standalone\"] [data-testid=\"section-header\"] h2,[aria-label=\"Sidebar\"] [data-sidebar-section-drop-id=\"pinned\"] [data-testid=\"section-header\"] h2",
+      "words": {
+        "Projects": "项目",
+        "Conversations": "对话",
+        "Pinned Conversations": "置顶对话",
+        "All conversations": "全部对话"
+      },
+      "direct": true
+    },
+    {
+      "selector": "[aria-label=\"Sidebar\"] [data-sidebar-section-drop-id] > span.select-none",
+      "words": {
+        "No conversations yet": "暂无对话",
+        "Drop to add to group": "拖放以添加到分组"
+      },
+      "direct": true
+    },
+    {
+      "selector": "[aria-label=\"Sidebar\"] button[aria-label=\"New Conversation\"],[data-testid=\"sidebar-add-project-button\"],[data-testid=\"conversation-kebab\"],[data-testid=\"conversation-pin-button\"],[data-testid=\"conversation-archive-button\"],[data-testid=\"conversation-delete-button\"],[data-testid=\"conversation-restore-button\"]",
+      "words": {
+        "New Conversation": "新建对话",
+        "Create New Project": "创建项目",
+        "More options": "更多选项",
+        "Pin conversation": "置顶对话",
+        "Unpin conversation": "取消置顶对话",
+        "Archive conversation": "归档对话",
+        "Delete conversation": "删除对话",
+        "Restore conversation": "恢复对话"
+      },
+      "attributes": [
+        "aria-label",
+        "title"
+      ]
+    },
+    {
+      "selector": "[data-testid=\"sidebar-search-button\"],[data-testid=\"sidebar-toggle\"],[data-testid=\"toggle-aux-sidebar\"],[data-testid=\"toggle-overview-panel\"]",
+      "words": {
+        "Search Conversations": "搜索对话",
+        "Toggle Sidebar": "切换侧边栏",
+        "Toggle Auxiliary Pane": "切换辅助面板",
+        "Toggle Overview Panel": "切换概览面板"
+      },
+      "attributes": [
+        "aria-label",
+        "title"
+      ]
+    },
+    {
+      "selector": "[data-testid=\"customizations-search\"],[data-testid=\"history-search-input\"],[data-testid=\"project-selector-search\"],[data-testid=\"new-sidecar-name\"],[data-testid=\"new-sidecar-prompt\"],[data-testid=\"sidecars-view\"] input",
+      "words": {
+        "Search customizations...": "搜索自定义内容…",
+        "Search conversations...": "搜索对话…",
+        "Search projects...": "搜索项目…",
+        "Search tasks...": "搜索任务…",
+        "Search automations...": "搜索自动化…",
+        "Enter automation name...": "输入自动化名称…",
+        "Enter task name...": "输入任务名称…",
+        "Enter a prompt for the agent to run...": "输入交给智能体执行的提示词…"
+      },
+      "attributesOnly": true,
+      "attributes": [
+        "placeholder",
+        "aria-label"
+      ]
+    },
+    {
+      "selector": "[data-testid=\"plugins-tabs\"],[data-testid=\"plugins-source\"]",
+      "words": {
+        "Marketplace": "插件市场",
+        "Installed": "已安装",
+        "Local": "本地",
+        "Remote": "远程"
+      }
+    },
+    {
+      "selector": ".max-w-4xl h1",
+      "words": {
+        "Customizations": "自定义"
+      },
+      "paths": [
+        "/customizations",
+        "/customizations/installed"
+      ],
+      "direct": true
+    },
+    {
+      "selector": "[data-testid=\"customizations-marketplace\"] h2,[data-testid=\"customizations-marketplace\"] h3,[data-testid=\"customizations-installed\"] h2,[data-testid=\"customizations-installed\"] h3",
+      "words": {
+        "Plugins": "插件",
+        "Skills": "技能",
+        "Agents": "智能体",
+        "Rules": "规则",
+        "Hooks": "钩子",
+        "Automations": "自动化",
+        "MCP Servers": "MCP 服务器",
+        "Google Workspace": "Google Workspace",
+        "Build with Google": "使用 Google 构建"
+      },
+      "direct": true,
+      "exclude": "[data-testid=\"customization-card\"]"
+    },
+    {
+      "selector": "[data-testid=\"customizations-empty-state\"] p,[data-testid=\"customizations-empty-state\"] a,[data-testid=\"customizations-empty-state\"]",
+      "words": {
+        "Find skills, agents, and more in the Marketplace.": "在插件市场中发现技能、智能体及更多功能。",
+        "Browse the Marketplace": "浏览插件市场",
+        "No plugins available.": "暂无可用插件。",
+        "No matching plugins found.": "未找到匹配的插件。"
+      },
+      "direct": true
+    },
+    {
+      "selector": "[data-testid=\"sidecars-view\"] h1,[data-testid=\"sidecar-create-with-prompt\"],[data-testid=\"sidecar-new-button\"],[data-testid=\"cloud-trigger-renew-all-credentials\"]",
+      "words": {
+        "Automations": "自动化",
+        "Scheduled Tasks": "定时任务",
+        "Create with Prompt": "通过提示词创建",
+        "New": "新建",
+        "Refresh all credentials": "刷新所有凭据",
+        "Add automation": "添加自动化",
+        "Add scheduled task": "添加定时任务"
+      },
+      "attributes": [
+        "aria-label",
+        "title"
+      ]
+    },
+    {
+      "selector": "[data-testid=\"sidecar-list-empty\"]",
+      "words": {
+        "No automations configured.": "尚未配置自动化。",
+        "No automations matching your search": "没有匹配搜索条件的自动化",
+        "No scheduled tasks configured.": "尚未配置定时任务。",
+        "No scheduled tasks matching your search": "没有匹配搜索条件的定时任务"
+      }
+    },
+    {
+      "selector": "[data-testid=\"sidecar-action-manage-permissions\"],[data-testid=\"sidecar-action-run-now\"],[data-testid=\"sidecar-action-restart\"],[data-testid=\"sidecar-action-view-logs\"],[data-testid=\"sidecar-action-delete\"]",
+      "words": {
+        "Manage Permissions": "管理权限",
+        "Run Now": "立即运行",
+        "Restart": "重新启动",
+        "View Logs": "查看日志",
+        "Delete": "删除"
+      }
+    },
+    {
+      "selector": "[data-testid=\"new-sidecar-modal\"] label,[data-testid=\"new-sidecar-modal\"] span:not(.truncate),[data-testid=\"new-sidecar-modal\"] button,[data-testid=\"new-sidecar-submit\"]",
+      "words": {
+        "Name": "名称",
+        "Prompt": "提示词",
+        "Runs on": "运行位置",
+        "This computer": "本机",
+        "Cloud": "云端",
+        "Local": "本地",
+        "Project": "项目",
+        "Model": "模型",
+        "Schedule": "计划",
+        "Trigger": "触发器",
+        "Hourly": "每小时",
+        "Daily": "每天",
+        "Weekly": "每周",
+        "Custom": "自定义",
+        "Time Zone": "时区",
+        "Time zone": "时区",
+        "Create": "创建",
+        "Creating...": "正在创建…",
+        "Cancel": "取消",
+        "Select a project": "选择项目",
+        "No project": "不关联项目"
+      },
+      "direct": true,
+      "exclude": "[role=\"option\"],[data-testid=\"project-selector-item\"],[data-testid=\"sidecar-model-option\"]"
+    },
+    {
+      "selector": "[data-testid=\"cancel-delete-sidecar\"],[data-testid=\"confirm-delete-sidecar\"],[data-testid=\"confirm-delete-conversation\"],[data-testid=\"confirm-delete-mcp\"],[data-testid=\"confirm-delete-skill\"],[data-testid=\"mcp-config-confirm\"],[data-testid=\"declared-permissions-confirm\"]",
+      "words": {
+        "Cancel": "取消",
+        "Delete": "删除",
+        "Confirm": "确认",
+        "Install": "安装",
+        "Save": "保存",
+        "Allow": "允许"
+      }
+    },
+    {
+      "selector": "[data-testid=\"delete-sidecar-modal\"] > div:first-child",
+      "words": {
+        "Are you sure you want to delete": "确定要删除",
+        "? This action cannot be undone.": "吗？此操作无法撤销。"
+      },
+      "direct": true
+    },
+    {
+      "selector": "[data-testid=\"media-modal-close\"],[data-testid=\"media-modal-copy\"],[data-testid=\"media-modal-download\"],[data-testid=\"media-modal-zoom-in\"],[data-testid=\"media-modal-zoom-out\"],[data-testid=\"media-modal-zoom-reset\"]",
+      "words": {
+        "Close": "关闭",
+        "Copy": "复制",
+        "Download": "下载",
+        "Zoom in": "放大",
+        "Zoom out": "缩小",
+        "Reset zoom": "重置缩放"
+      },
+      "attributes": [
+        "title",
+        "aria-label"
+      ]
+    }
   ],
-  "settingsNav": { "General": "常规", "Application": "应用", "App": "应用", "Appearance": "外观", "Models": "模型", "Shortcuts": "快捷键", "Provide Feedback": "提供反馈", "Notifications": "通知", "Permissions": "权限", "Browser": "浏览器", "Customizations": "自定义" },
+  "settingsNav": {
+    "General": "常规",
+    "Application": "应用",
+    "App": "应用",
+    "Appearance": "外观",
+    "Models": "模型",
+    "Shortcuts": "快捷键",
+    "Provide Feedback": "提供反馈",
+    "Notifications": "通知",
+    "Permissions": "权限",
+    "Browser": "浏览器",
+    "Customizations": "自定义",
+    "Settings": "设置",
+    "Projects": "项目",
+    "Workspaces": "工作区",
+    "Not in Project": "未归属项目",
+    "Conversations": "对话",
+    "Developer": "开发者",
+    "Editor": "编辑器"
+  },
   "settings": {
-    "General": "常规", "Application": "应用", "Appearance": "外观", "Models": "模型", "Notifications": "通知", "Shortcuts": "快捷键", "Provide Feedback": "提供反馈",
+    "General": "常规",
+    "Application": "应用",
+    "Appearance": "外观",
+    "Models": "模型",
+    "Notifications": "通知",
+    "Shortcuts": "快捷键",
+    "Provide Feedback": "提供反馈",
     "Configure agent execution, queued message delivery, and permissions.": "配置智能体执行、排队消息发送及权限。",
-    "Execution": "执行", "Queued Messages": "排队消息", "Configure when follow-up messages are sent.": "配置后续消息的发送时机。",
-    "Queue until after the current turn.": "排队等待当前轮次结束。", "Interrupt the agent and send immediately.": "中断智能体并立即发送。", "Keyboard shortcuts": "键盘快捷键",
-    "Global Permissions": "全局权限", "Security Preset": "安全预设", "Controls the actions the agent can take.": "控制智能体可以执行的操作。", "Learn more about Default": "了解默认预设", "Default": "默认",
-    "Tool Permissions": "工具权限", "Modify permissions for file, terminal, and MCP tools.": "修改文件、终端和 MCP 工具的权限。", "Open": "打开", "Edit": "编辑", "Save": "保存", "Cancel": "取消", "Close": "关闭", "Back": "返回", "Done": "完成", "Search": "搜索",
-    "Agent Behavior": "智能体行为", "Plan Review Policy": "计划审核策略", "Whether the agent asks you to review its documents.": "是否要求你审核智能体生成的文档。", "Type / and select plan to have the agent generate a plan.": "输入 / 并选择 plan，让智能体生成计划。", "Always Ask": "始终询问", "Request Review": "请求审核",
-    "Network Permissions": "网络权限", "Network Access Rules": "网络访问规则", "Configure allowed and denied URLs for reading.": "配置允许和禁止读取的网址。", "Terminal & Tooling Permissions": "终端与工具权限", "Commands Outside Sandbox": "沙箱外命令", "Configure allowed commands outside the sandbox.": "配置允许在沙箱外执行的命令。",
-    "Browser": "浏览器", "Browser Javascript Execution Policy": "浏览器 JavaScript 执行策略", "Controls whether the agent can run custom JavaScript to automate complex browser actions.": "控制智能体能否运行自定义 JavaScript 来自动执行复杂的浏览器操作。", "Browser Actuation Rules": "浏览器操作规则", "Configure allowed and denied URLs for browser actuation.": "配置允许和禁止浏览器操作的网址。",
+    "Execution": "执行",
+    "Queued Messages": "排队消息",
+    "Configure when follow-up messages are sent.": "配置后续消息的发送时机。",
+    "Queue until after the current turn.": "排队等待当前轮次结束。",
+    "Interrupt the agent and send immediately.": "中断智能体并立即发送。",
+    "Keyboard shortcuts": "键盘快捷键",
+    "Global Permissions": "全局权限",
+    "Security Preset": "安全预设",
+    "Controls the actions the agent can take.": "控制智能体可以执行的操作。",
+    "Learn more about Default": "了解默认预设",
+    "Default": "默认",
+    "Tool Permissions": "工具权限",
+    "Modify permissions for file, terminal, and MCP tools.": "修改文件、终端和 MCP 工具的权限。",
+    "Open": "打开",
+    "Edit": "编辑",
+    "Save": "保存",
+    "Cancel": "取消",
+    "Close": "关闭",
+    "Back": "返回",
+    "Done": "完成",
+    "Search": "搜索",
+    "Agent Behavior": "智能体行为",
+    "Plan Review Policy": "计划审核策略",
+    "Whether the agent asks you to review its documents.": "是否要求你审核智能体生成的文档。",
+    "Type / and select plan to have the agent generate a plan.": "输入 / 并选择 plan，让智能体生成计划。",
+    "Always Ask": "始终询问",
+    "Request Review": "请求审核",
+    "Network Permissions": "网络权限",
+    "Network Access Rules": "网络访问规则",
+    "Configure allowed and denied URLs for reading.": "配置允许和禁止读取的网址。",
+    "Terminal & Tooling Permissions": "终端与工具权限",
+    "Commands Outside Sandbox": "沙箱外命令",
+    "Configure allowed commands outside the sandbox.": "配置允许在沙箱外执行的命令。",
+    "Browser": "浏览器",
+    "Browser Javascript Execution Policy": "浏览器 JavaScript 执行策略",
+    "Controls whether the agent can run custom JavaScript to automate complex browser actions.": "控制智能体能否运行自定义 JavaScript 来自动执行复杂的浏览器操作。",
+    "Browser Actuation Rules": "浏览器操作规则",
+    "Configure allowed and denied URLs for browser actuation.": "配置允许和禁止浏览器操作的网址。",
     "Configure the browser subagent. It requires Google Chrome to be installed. The browser subagent can be invoked by typing /browser in the conversation input box.": "配置浏览器子智能体。需要安装 Google Chrome。在对话输入框中输入 /browser 即可调用。",
-    "Configure the agent's visual theme and display preferences.": "配置智能体的界面主题和显示偏好。", "Chat Settings": "对话设置", "Theme": "主题", "Theme Mode": "主题模式", "System": "跟随系统", "Light": "浅色", "Dark": "深色", "Conversation Width": "对话宽度", "Configure the maximum width of the conversation panel.": "配置对话面板的最大宽度。", "Narrow": "窄", "Wide": "宽", "Fill": "填满", "Markdown Artifact Width": "Markdown 文档宽度", "Configure the default width of markdown artifacts.": "配置 Markdown 文档的默认宽度。", "Verbose Agent Chat": "详细智能体对话", "Display and preserve intermediate thinking steps.": "显示并保留中间思考步骤。", "Context Menus": "右键菜单", "Custom Context Menus": "自定义右键菜单", "Replace the default browser right-click menu with quick actions.": "使用快捷操作替换默认浏览器右键菜单。",
-    "Advanced Settings": "高级设置", "General Settings": "常规设置", "Updates": "更新", "Check for Updates": "检查更新", "Checking for Updates…": "正在检查更新…", "Up to Date": "已是最新版本", "Download Update": "下载更新", "Restart to Update": "重启以更新", "About": "关于", "Version": "版本", "Run in Background": "后台运行", "Keep Computer Awake": "保持电脑唤醒", "Automatically Check for Updates": "自动检查更新"
+    "Configure the agent's visual theme and display preferences.": "配置智能体的界面主题和显示偏好。",
+    "Chat Settings": "对话设置",
+    "Theme": "主题",
+    "Theme Mode": "主题模式",
+    "System": "跟随系统",
+    "Light": "浅色",
+    "Dark": "深色",
+    "Conversation Width": "对话宽度",
+    "Configure the maximum width of the conversation panel.": "配置对话面板的最大宽度。",
+    "Narrow": "窄",
+    "Wide": "宽",
+    "Fill": "填满",
+    "Markdown Artifact Width": "Markdown 文档宽度",
+    "Configure the default width of markdown artifacts.": "配置 Markdown 文档的默认宽度。",
+    "Verbose Agent Chat": "详细智能体对话",
+    "Display and preserve intermediate thinking steps.": "显示并保留中间思考步骤。",
+    "Context Menus": "右键菜单",
+    "Custom Context Menus": "自定义右键菜单",
+    "Replace the default browser right-click menu with quick actions.": "使用快捷操作替换默认浏览器右键菜单。",
+    "Advanced Settings": "高级设置",
+    "General Settings": "常规设置",
+    "Updates": "更新",
+    "Check for Updates": "检查更新",
+    "Checking for Updates…": "正在检查更新…",
+    "Up to Date": "已是最新版本",
+    "Download Update": "下载更新",
+    "Restart to Update": "重启以更新",
+    "About": "关于",
+    "Version": "版本",
+    "Run in Background": "后台运行",
+    "Keep Computer Awake": "保持电脑唤醒",
+    "Automatically Check for Updates": "自动检查更新",
+    "Queue": "排队发送",
+    "Send Immediately": "立即发送",
+    "Learn more about": "了解预设",
+    "Type": "输入",
+    "and select": "并选择",
+    "to have the agent generate a plan.": "让智能体生成计划。",
+    "Configure the browser subagent. It requires": "配置浏览器子智能体。需要安装",
+    "to be installed.": "。",
+    "The browser subagent can be invoked by typing /browser in the conversation input box.": "在对话输入框中输入 /browser 即可调用浏览器子智能体。",
+    "Manage Antigravity app settings.": "管理 Antigravity 应用设置。",
+    "Prevent Sleep": "防止休眠",
+    "Prevent the computer from sleeping while the app is running.": "应用运行时防止电脑进入休眠。",
+    "Keep In Menu Bar": "后台保留运行",
+    "Keep the app accessible from the menu bar and running in the background when all windows are closed.": "关闭所有窗口后，仍在菜单栏保留应用入口并在后台运行。",
+    "Remote Control": "远程控制",
+    "Enable Remote Control": "启用远程控制",
+    "Work with local agents from another device.": "从其他设备使用本机智能体。",
+    "Manage your conversations from the companion website.": "通过配套网站管理对话。",
+    "Notification Settings": "通知设置",
+    "To modify notification settings, open your operating system's system preferences.": "如需修改通知设置，请打开操作系统的系统设置。",
+    "Open System Preferences": "打开系统设置",
+    "App version": "应用版本",
+    "Automatic Check for Updates": "自动检查更新",
+    "Automatically prompt you to restart the app when a new update is available. When disabled, you can check for updates manually from the app menu.": "有新版本时自动提示重启应用。关闭后，可从应用菜单中手动检查更新。",
+    "Theme Customization": "主题自定义",
+    "Customize the look and feel of your app.": "自定义应用的界面外观。",
+    "Color Theme": "颜色主题",
+    "Font Size": "字体大小",
+    "Font Family": "字体",
+    "Reset to Default": "恢复默认",
+    "Follow System": "跟随系统",
+    "Show intermediate thinking": "显示中间思考过程",
+    "Configure the models available to the agent.": "配置智能体可用的模型。",
+    "Manage Models": "管理模型",
+    "Available Models": "可用模型",
+    "Default Model": "默认模型",
+    "Model Settings": "模型设置",
+    "Show All": "显示全部",
+    "Show Less": "收起",
+    "Permissions": "权限",
+    "File Access": "文件访问",
+    "Terminal": "终端",
+    "Network": "网络",
+    "Always Allow": "始终允许",
+    "Always Deny": "始终拒绝",
+    "Never": "从不",
+    "Ask": "询问",
+    "Allow": "允许",
+    "Deny": "拒绝",
+    "On": "开启",
+    "Off": "关闭",
+    "Enabled": "已启用",
+    "Disabled": "已禁用",
+    "Custom": "自定义",
+    "Use Global Settings": "使用全局设置",
+    "Use global settings": "使用全局设置",
+    "Keyboard Shortcuts": "键盘快捷键",
+    "Search shortcuts...": "搜索快捷键…",
+    "Action": "操作",
+    "Shortcut": "快捷键",
+    "Keybinding": "按键绑定",
+    "Command": "命令",
+    "Reset": "重置",
+    "New Conversation": "新建对话",
+    "New Window": "新建窗口",
+    "Open Settings": "打开设置",
+    "Open Workspace": "打开工作区",
+    "Command Palette": "命令面板",
+    "Open Command Palette": "打开命令面板",
+    "Search Conversations": "搜索对话",
+    "Toggle Sidebar": "切换侧边栏",
+    "Toggle Overview Panel": "切换概览面板",
+    "Toggle Auxiliary Pane": "切换辅助面板",
+    "Toggle Terminal": "切换终端",
+    "Close Tab": "关闭标签页",
+    "Next Tab": "下一个标签页",
+    "Previous Tab": "上一个标签页",
+    "Go Back": "后退",
+    "Go Forward": "前进",
+    "Send Message": "发送消息",
+    "Stop Generation": "停止生成",
+    "Continue Response": "继续回复",
+    "Open Conversation History": "打开对话历史",
+    "Scheduled Tasks": "定时任务",
+    "Send Feedback": "发送反馈",
+    "Submit": "提交",
+    "Feedback": "反馈",
+    "Description": "说明",
+    "Include logs": "附加日志",
+    "Copy": "复制",
+    "Copied": "已复制",
+    "Copy error messages": "复制错误信息",
+    "No results found": "未找到结果",
+    "No results": "无结果",
+    "Loading...": "正在加载…"
   }
 }

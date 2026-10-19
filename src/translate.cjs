@@ -23,8 +23,10 @@ function installTranslation(win, spec) {
     node.nodeValue = value;
     counters.changes++;
   }
-  function translateElement(el, words, attributes = [], direct = false) {
-    if (blocked(el)) return;
+  function translateElement(el, words, attributes = [], direct = false, attributesOnly = false) {
+    if (attributesOnly ? blocked(el.parentElement) : blocked(el)) return;
+    if (attributesOnly && !el.matches('input,textarea')) return;
+    if (!attributesOnly) {
     if (direct) {
       for (const node of el.childNodes) if (node.nodeType === 3) replaceText(node, words);
     } else {
@@ -32,7 +34,9 @@ function installTranslation(win, spec) {
       let node;
       while ((node = walker.nextNode())) replaceText(node, words);
     }
+    }
     for (const name of attributes) {
+      if (!['title','aria-label','placeholder'].includes(name)) continue;
       const value = el.getAttribute(name);
       if (value && Object.hasOwn(words, value)) {
         let history = attrHistory.get(el);
@@ -60,7 +64,7 @@ function installTranslation(win, spec) {
       }
       if (root.nodeType === 1) for (const el of [root, ...root.querySelectorAll('*')]) {
         const old = attrHistory.get(el);
-        if (old && blocked(el)) {
+        if (old && (el.matches('input,textarea') ? blocked(el.parentElement) : blocked(el))) {
           for (const [name, entry] of Object.entries(old)) if (el.getAttribute(name) === entry.translated) el.setAttribute(name, entry.original);
           attrHistory.delete(el);
         }
@@ -73,6 +77,8 @@ function installTranslation(win, spec) {
   }
   function settingsRoot() {
     if (new URL(win.location.href).searchParams.get('settingsOpen') !== 'true') return null;
+    const modal = doc.querySelector('.settings-modal-container');
+    if (modal) return modal;
     const anchor = doc.querySelector('[data-testid="settings-nav-item-Account"]');
     for (let el = anchor?.parentElement; el && el !== doc.body; el = el.parentElement) {
       if (el.querySelector('.max-w-2xl h2') && !el.querySelector('nav[aria-label="Sidebar"]')) return el;
@@ -82,8 +88,10 @@ function installTranslation(win, spec) {
   function pass() {
     counters.passes++;
     for (const rule of spec.rules) {
+      if (rule.paths && !rule.paths.includes(win.location.pathname)) continue;
       for (const el of doc.querySelectorAll(rule.selector)) {
-        translateElement(el, rule.words, rule.attributes);
+        if (rule.exclude && el.closest(rule.exclude)) continue;
+        translateElement(el, rule.words, rule.attributes, rule.direct, rule.attributesOnly);
         const tooltipId = el.getAttribute('data-tooltip-id');
         const tooltip = tooltipId && doc.getElementById(tooltipId);
         if (tooltip) translateElement(tooltip, rule.words);
@@ -91,13 +99,21 @@ function installTranslation(win, spec) {
     }
     const root = settingsRoot();
     if (root) {
-      for (const el of root.querySelectorAll('[data-testid^="settings-nav-item-"]')) {
-        if (el.dataset.testid !== 'settings-nav-item-Account') translateElement(el, spec.settingsNav);
+      const sidebar = root.querySelector('[data-testid="settings-nav-item-Account"]')?.closest('.bg-sidebar');
+      const heading = sidebar?.querySelector('h1');
+      const globalGroup = heading?.parentElement.nextElementSibling;
+      for (const el of sidebar?.querySelectorAll('[data-testid^="settings-nav-item-"]') || []) {
+        const id = el.dataset.testid;
+        const shared = el.parentElement === globalGroup?.parentElement && ['settings-nav-item-Shortcuts','settings-nav-item-Provide Feedback'].includes(id);
+        const outsideProject = id === 'settings-nav-item-Conversations' && ['Not in Project','未归属项目'].includes(el.parentElement.previousElementSibling?.textContent.trim());
+        if (el.parentElement === globalGroup || shared || outsideProject) translateElement(el, spec.settingsNav);
       }
+      for (const el of sidebar?.querySelectorAll('h1,h2') || []) translateElement(el, spec.settingsNav, [], true);
       // Ignore dynamic project/workspace/account rows outside the fixed content column.
-      for (const el of root.querySelectorAll('.max-w-2xl h2,.max-w-2xl h3,.max-w-2xl label,.max-w-2xl span:not(.truncate),.max-w-2xl button,.max-w-2xl div')) {
+      for (const el of root.querySelectorAll('.max-w-2xl h1,.max-w-2xl h2,.max-w-2xl h3,.max-w-2xl p,.max-w-2xl a,.max-w-2xl label,.max-w-2xl span:not(.truncate),.max-w-2xl button,.max-w-2xl div')) {
         if (el.querySelector('input,textarea,[contenteditable="true"]')) continue;
-        translateElement(el, spec.settings, [], true);
+        if (el.closest('.truncate,[data-project-label],.font-mono')) continue;
+        translateElement(el, spec.settings, ['title'], true);
       }
     }
   }
@@ -105,13 +121,16 @@ function installTranslation(win, spec) {
   const observer = new win.MutationObserver(records => {
     restoreMovedNodes(records);
     // Changes confined to excluded content never schedule a full scan.
-    if (!records.some(r => !blocked(r.target.nodeType === 1 ? r.target : r.target.parentElement))) return;
+    if (!records.some(r => {
+      if (r.type === 'attributes' && r.target.matches('input,textarea')) return !blocked(r.target.parentElement);
+      return !blocked(r.target.nodeType === 1 ? r.target : r.target.parentElement);
+    })) return;
     if (timer === null) timer = win.setTimeout(() => { timer = null; run(); }, 60);
   });
   function run() {
     observer.disconnect();
     try { pass(); } catch (error) { console.warn('[AntigravityZh] translation pass failed', error.message); }
-    finally { observer.observe(doc.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['title','aria-label','data-testid','contenteditable','role'] }); }
+    finally { observer.observe(doc.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['title','aria-label','placeholder','href','data-testid','contenteditable','role'] }); }
   }
   let started = false;
   function start() {
