@@ -33,3 +33,12 @@ test('menu commands and overview labels translated without touching arbitrary to
   const dom=page('<button data-testid="title-menu-bar-item">File</button><button data-testid="title-menu-bar-option"><span>Create Project</span><span>Ctrl+N</span></button><button data-testid="overview-panel-row-files"><span>Files</span><span>Files</span></button><div role="tooltip">Settings</div><button data-testid="settings-button" data-tooltip-id="settings-tip">Settings</button><div id="settings-tip" role="tooltip">Settings</div>');
   const d=dom.window.document;assert.equal(d.querySelector('[data-testid="title-menu-bar-item"]').textContent,'文件');assert.equal(d.querySelector('[data-testid="title-menu-bar-option"]').textContent,'创建项目Ctrl+N');assert.equal(d.querySelector('[data-testid="overview-panel-row-files"]').textContent,'文件Files');assert.equal(d.querySelector('[role="tooltip"]').textContent,'Settings');assert.equal(d.getElementById('settings-tip').textContent,'设置');dom.window.close();
 });
+test('terminal navigation is translated while terminal content stays untouched',()=>{
+  const dom=page('<button data-testid="overview-panel-row-terminal"><span>Terminal</span></button><div data-testid="terminal-surface"><button data-testid="settings-button">Settings</button></div>');
+  const d=dom.window.document;assert.equal(d.querySelector('[data-testid="overview-panel-row-terminal"]').textContent,'终端');assert.equal(d.querySelector('[data-testid="terminal-surface"]').textContent,'Settings');dom.window.close();
+});
+test('streaming user content does not schedule translation passes',async()=>{
+  const dom=page('<article><span></span></article>');const d=dom.window.document;await tick();const passes=dom.window.__antigravityZh.passes;
+  for(let i=0;i<500;i++)d.querySelector('article span').textContent='Settings '+i;
+  await tick();assert.equal(dom.window.__antigravityZh.passes,passes);assert.equal(d.querySelector('article span').textContent,'Settings 499');dom.window.close();
+});

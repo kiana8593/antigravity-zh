@@ -5,7 +5,7 @@ function installTranslation(win, spec) {
   if (win.location.hostname !== '127.0.0.1' || win.location.protocol !== 'https:') return;
   if (win.top !== win || win.__antigravityZh) return;
   const doc = win.document;
-  const excluded = 'article,pre,code,textarea,input,[contenteditable]:not([contenteditable="false"]),[role="textbox"],.monaco-editor,.xterm,webview,iframe,[data-testid="conversation-view"],[data-testid*="terminal"],[data-testid="settings-nav-item-Account"],[data-agzh-ignore]';
+  const excluded = 'article,pre,code,textarea,input,[contenteditable]:not([contenteditable="false"]),[role="textbox"],.monaco-editor,.xterm,webview,iframe,[data-testid="conversation-view"],[data-testid="terminal-surface"],[data-testid="terminal-tab-surface"],[data-testid="standalone-terminal-view"],[data-testid="settings-nav-item-Account"],[data-agzh-ignore]';
   const textHistory = new WeakMap();
   const attrHistory = new WeakMap();
   const counters = { changes: 0, passes: 0, version: spec.version };
