@@ -1,0 +1,16 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),crypto=require('node:crypto');
+if(process.platform!=='win32')throw Error('Windows packaging requires PowerShell');
+const root=path.resolve(__dirname,'..'),version=JSON.parse(fs.readFileSync(path.join(root,'package.json'))).version;
+if(!/^\d+\.\d+\.\d+$/.test(version))throw Error('Expected a release version');
+const dist=path.join(root,'dist');fs.mkdirSync(dist,{recursive:true});
+const temporary=fs.mkdtempSync(path.join(dist,'package-')),folder=path.join(temporary,`antigravity-zh-v${version}`);fs.mkdirSync(folder);
+const files=['README.md','LICENSE','CHANGELOG.md','CONTRIBUTING.md','package.json','package-lock.json',...fs.readdirSync(root).filter(x=>x.endsWith('.cmd'))];
+const folders=['src','tools','dictionary','compatibility','docs','test'];
+for(const file of files)fs.copyFileSync(path.join(root,file),path.join(folder,file));
+for(const dir of folders)fs.cpSync(path.join(root,dir),path.join(folder,dir),{recursive:true});
+function inspect(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const name=path.join(dir,entry.name);if(entry.isDirectory())inspect(name);else if(/\.(?:asar|exe|pem|key|bundle|log)$/.test(name))throw Error('Forbidden release artifact');}}inspect(folder);
+const zip=path.join(dist,`antigravity-zh-v${version}-windows.zip`),quote=s=>"'"+s.replace(/'/g,"''")+"'";
+cp.execFileSync('powershell.exe',['-NoProfile','-NonInteractive','-Command',`$ErrorActionPreference='Stop'; Compress-Archive -LiteralPath ${quote(folder)} -DestinationPath ${quote(zip)} -Force`],{windowsHide:true});
+const hash=crypto.createHash('sha256').update(fs.readFileSync(zip)).digest('hex');fs.writeFileSync(zip+'.sha256',`${hash}  ${path.basename(zip)}\n`);
+console.log(JSON.stringify({zip,sha256:hash}));

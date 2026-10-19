@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-dev.2",
+  "version": "0.1.0",
   "rules": [
     {
       "selector": "[data-testid=\"new-conversation-button\"],[data-testid=\"app-icon-new-conversation-button\"]",
