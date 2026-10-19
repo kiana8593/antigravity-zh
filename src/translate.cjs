@@ -6,13 +6,14 @@ function installTranslation(win, spec) {
   if (win.top !== win || win.__antigravityZh) return;
   const doc = win.document;
   const excluded = 'article,pre,code,textarea,input,[contenteditable]:not([contenteditable="false"]),[role="textbox"],.monaco-editor,.xterm,webview,iframe,[data-testid="conversation-view"],[data-testid="terminal-surface"],[data-testid="terminal-tab-surface"],[data-testid="standalone-terminal-view"],[data-testid="settings-nav-item-Account"],[data-agzh-ignore]';
+  const hardExcluded = excluded.replace(',[data-testid="conversation-view"]','');
   const textHistory = new WeakMap();
   const attrHistory = new WeakMap();
   const counters = { changes: 0, passes: 0, version: spec.version };
   win.__antigravityZh = counters;
   function blocked(el) { return !el || !!el.closest(excluded); }
-  function replaceText(node, words) {
-    if (blocked(node.parentElement)) return;
+  function replaceText(node, words, placeholder = false) {
+    if (placeholder ? node.parentElement.closest(hardExcluded) : blocked(node.parentElement)) return;
     const raw = node.nodeValue;
     const key = raw.trim();
     if (!Object.hasOwn(words, key)) return;
@@ -85,6 +86,11 @@ function installTranslation(win, spec) {
     }
     return null;
   }
+  function placeholderIn(host) {
+    if (!host || host.closest(hardExcluded)) return null;
+    if (!host.querySelector(':scope > [data-lexical-editor="true"][contenteditable="true"][aria-label="Message input"]')) return null;
+    return host.querySelector(':scope > p.pointer-events-none');
+  }
   function pass() {
     counters.passes++;
     for (const rule of spec.rules) {
@@ -92,9 +98,19 @@ function installTranslation(win, spec) {
       for (const el of doc.querySelectorAll(rule.selector)) {
         if (rule.exclude && el.closest(rule.exclude)) continue;
         translateElement(el, rule.words, rule.attributes, rule.direct, rule.attributesOnly);
-        const tooltipId = el.getAttribute('data-tooltip-id');
-        const tooltip = tooltipId && doc.getElementById(tooltipId);
-        if (tooltip) translateElement(tooltip, rule.words);
+        for (const owner of [el,...el.querySelectorAll('[data-tooltip-id],[aria-describedby]')]) {
+          const ids = `${owner.getAttribute('data-tooltip-id') || ''} ${owner.getAttribute('aria-describedby') || ''}`.trim().split(/\s+/);
+          for (const id of ids) {
+            const tooltip = id && doc.getElementById(id);
+            if (tooltip) translateElement(tooltip, rule.words);
+          }
+        }
+      }
+    }
+    for (const editor of doc.querySelectorAll('[data-lexical-editor="true"][contenteditable="true"][aria-label="Message input"]')) {
+      const placeholder = placeholderIn(editor.parentElement);
+      if (placeholder && spec.inputPlaceholder) for (const node of placeholder.childNodes) {
+        if (node.nodeType === 3) replaceText(node,spec.inputPlaceholder,true);
       }
     }
     const root = settingsRoot();
@@ -124,8 +140,10 @@ function installTranslation(win, spec) {
     restoreMovedNodes(records);
     // Changes confined to excluded content never schedule a full scan.
     if (!records.some(r => {
+      const target = r.target.nodeType === 1 ? r.target : r.target.parentElement;
+      if (placeholderIn(target) || (target?.matches('p.pointer-events-none') && placeholderIn(target.parentElement) === target)) return true;
       if (r.type === 'attributes' && r.target.matches('input,textarea')) return !blocked(r.target.parentElement);
-      return !blocked(r.target.nodeType === 1 ? r.target : r.target.parentElement);
+      return !blocked(target);
     })) return;
     if (timer === null) timer = win.setTimeout(() => { timer = null; run(); }, 60);
   });

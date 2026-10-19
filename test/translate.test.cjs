@@ -64,3 +64,9 @@ test('customization headings are path-bound and creation forms preserve user nam
   assert.equal(d.querySelector('h1').textContent,'自定义');assert.equal(d.querySelector('label').textContent,'提示词');assert.equal(d.querySelector('input').value,'Cloud');assert.equal(d.querySelector('.truncate').textContent,'Model');assert.equal(d.querySelector('[role="option"] span').textContent,'Cloud');assert.equal(d.querySelector('button').textContent,'创建');dom.window.close();
   const other=page('<div class="max-w-4xl"><h1>Customizations</h1></div>','https://127.0.0.1:1234/c/id');assert.equal(other.window.document.querySelector('h1').textContent,'Customizations');other.window.close();
 });
+test('Lexical placeholder translates as a sibling without changing the editable message',async()=>{
+  const html='<div data-testid="conversation-view"><div><div data-lexical-editor="true" contenteditable="true" aria-label="Message input">Ask anything, @ to mention</div><p class="pointer-events-none">Ask anything, @ to mention, / for actions</p></div></div><article><div><div data-lexical-editor="true" contenteditable="true" aria-label="Message input"></div><p class="pointer-events-none">Ask anything, @ to mention</p></div></article>';
+  const dom=page(html),d=dom.window.document,editor=d.querySelector('[data-lexical-editor]'),placeholder=d.querySelector('p');
+  assert.equal(editor.textContent,'Ask anything, @ to mention');assert.equal(placeholder.textContent,'输入问题，@ 引用内容，/ 使用操作');assert.equal(d.querySelector('article p').textContent,'Ask anything, @ to mention');
+  placeholder.remove();const p=d.createElement('p');p.className='pointer-events-none';p.textContent='Ask anything, @ to mention';editor.parentElement.append(p);await tick();assert.equal(p.textContent,'输入问题，@ 引用内容');assert.equal(editor.textContent,'Ask anything, @ to mention');dom.window.close();
+});

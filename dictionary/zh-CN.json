@@ -585,5 +585,11 @@
         }
       ]
     }
-  ]
+  ],
+  "inputPlaceholder": {
+    "Ask anything, @ to mention, / for actions": "输入问题，@ 引用内容，/ 使用操作",
+    "Ask anything, @ to mention": "输入问题，@ 引用内容",
+    "Message subagent, @ to mention, / for actions": "向子智能体发送消息，@ 引用内容，/ 使用操作",
+    "Message subagent, @ to mention": "向子智能体发送消息，@ 引用内容"
+  }
 }
