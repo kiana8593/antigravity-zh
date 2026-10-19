@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0-dev.1",
+  "rules": [
+    { "selector": "[data-testid=\"new-conversation-button\"],[data-testid=\"app-icon-new-conversation-button\"]", "attributes": ["aria-label","title"], "words": { "New Conversation": "新建对话" } },
+    { "selector": "[data-testid=\"history-button\"]", "words": { "Conversation History": "对话历史" } },
+    { "selector": "[data-testid=\"automations-button\"]", "words": { "Automations": "自动化", "Scheduled Tasks": "定时任务" } },
+    { "selector": "[data-testid=\"settings-button\"],[data-testid=\"mobile-open-settings\"]", "attributes": ["aria-label","title"], "words": { "Settings": "设置" } },
+    { "selector": "nav[aria-label=\"Sidebar\"] a[href$=\"/customizations\"]", "words": { "Customizations": "自定义" } },
+    { "selector": "[data-testid=\"sidebar-search-button\"]", "attributes": ["aria-label","title"], "words": { "Search Conversations": "搜索对话" } },
+    { "selector": "[data-testid=\"sidebar-toggle\"]", "attributes": ["aria-label","title"], "words": { "Toggle Sidebar": "切换侧边栏" } },
+    { "selector": "[data-testid=\"toggle-aux-sidebar\"]", "attributes": ["aria-label","title"], "words": { "Toggle Auxiliary Pane": "切换辅助面板" } },
+    { "selector": "[role=\"tooltip\"]", "words": { "New Conversation": "新建对话", "Conversation History": "对话历史", "Settings": "设置", "Search Conversations": "搜索对话", "Toggle Sidebar": "切换侧边栏", "Go Back": "后退", "Go Forward": "前进", "Toggle Overview Panel": "切换概览面板", "Toggle Auxiliary Pane": "切换辅助面板" } }
+  ],
+  "settingsNav": { "General": "常规", "Application": "应用", "App": "应用", "Appearance": "外观", "Models": "模型", "Shortcuts": "快捷键", "Provide Feedback": "提供反馈", "Notifications": "通知", "Permissions": "权限", "Browser": "浏览器", "Customizations": "自定义" },
+  "settings": {
+    "General": "常规", "Application": "应用", "Appearance": "外观", "Models": "模型", "Notifications": "通知", "Shortcuts": "快捷键", "Provide Feedback": "提供反馈",
+    "Configure agent execution, queued message delivery, and permissions.": "配置智能体执行、排队消息发送及权限。",
+    "Execution": "执行", "Queued Messages": "排队消息", "Configure when follow-up messages are sent.": "配置后续消息的发送时机。",
+    "Queue until after the current turn.": "排队等待当前轮次结束。", "Interrupt the agent and send immediately.": "中断智能体并立即发送。", "Keyboard shortcuts": "键盘快捷键",
+    "Global Permissions": "全局权限", "Security Preset": "安全预设", "Controls the actions the agent can take.": "控制智能体可以执行的操作。", "Learn more about Default": "了解默认预设", "Default": "默认",
+    "Tool Permissions": "工具权限", "Modify permissions for file, terminal, and MCP tools.": "修改文件、终端和 MCP 工具的权限。", "Open": "打开", "Edit": "编辑", "Save": "保存", "Cancel": "取消", "Close": "关闭", "Back": "返回", "Done": "完成", "Search": "搜索",
+    "Agent Behavior": "智能体行为", "Plan Review Policy": "计划审核策略", "Whether the agent asks you to review its documents.": "是否要求你审核智能体生成的文档。", "Type / and select plan to have the agent generate a plan.": "输入 / 并选择 plan，让智能体生成计划。", "Always Ask": "始终询问", "Request Review": "请求审核",
+    "Network Permissions": "网络权限", "Network Access Rules": "网络访问规则", "Configure allowed and denied URLs for reading.": "配置允许和禁止读取的网址。", "Terminal & Tooling Permissions": "终端与工具权限", "Commands Outside Sandbox": "沙箱外命令", "Configure allowed commands outside the sandbox.": "配置允许在沙箱外执行的命令。",
+    "Browser": "浏览器", "Browser Javascript Execution Policy": "浏览器 JavaScript 执行策略", "Controls whether the agent can run custom JavaScript to automate complex browser actions.": "控制智能体能否运行自定义 JavaScript 来自动执行复杂的浏览器操作。", "Browser Actuation Rules": "浏览器操作规则", "Configure allowed and denied URLs for browser actuation.": "配置允许和禁止浏览器操作的网址。",
+    "Configure the browser subagent. It requires Google Chrome to be installed. The browser subagent can be invoked by typing /browser in the conversation input box.": "配置浏览器子智能体。需要安装 Google Chrome。在对话输入框中输入 /browser 即可调用。",
+    "Configure the agent's visual theme and display preferences.": "配置智能体的界面主题和显示偏好。", "Chat Settings": "对话设置", "Theme": "主题", "Theme Mode": "主题模式", "System": "跟随系统", "Light": "浅色", "Dark": "深色", "Conversation Width": "对话宽度", "Configure the maximum width of the conversation panel.": "配置对话面板的最大宽度。", "Narrow": "窄", "Wide": "宽", "Fill": "填满", "Markdown Artifact Width": "Markdown 文档宽度", "Configure the default width of markdown artifacts.": "配置 Markdown 文档的默认宽度。", "Verbose Agent Chat": "详细智能体对话", "Display and preserve intermediate thinking steps.": "显示并保留中间思考步骤。", "Context Menus": "右键菜单", "Custom Context Menus": "自定义右键菜单", "Replace the default browser right-click menu with quick actions.": "使用快捷操作替换默认浏览器右键菜单。",
+    "Advanced Settings": "高级设置", "General Settings": "常规设置", "Updates": "更新", "Check for Updates": "检查更新", "Checking for Updates…": "正在检查更新…", "Up to Date": "已是最新版本", "Download Update": "下载更新", "Restart to Update": "重启以更新", "About": "关于", "Version": "版本", "Run in Background": "后台运行", "Keep Computer Awake": "保持电脑唤醒", "Automatically Check for Updates": "自动检查更新"
+  }
+}

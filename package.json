@@ -1,0 +1,19 @@
+{
+  "name": "antigravity-zh",
+  "version": "0.1.0-dev.1",
+  "private": true,
+  "description": "Scoped Simplified Chinese UI patch for Antigravity desktop",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.cjs",
+    "status": "node tools/cli.cjs status",
+    "build": "node tools/cli.cjs build",
+    "install-patch": "node tools/cli.cjs install",
+    "restore": "node tools/cli.cjs restore"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.3"
+  }
+}
