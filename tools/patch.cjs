@@ -13,6 +13,17 @@ function build(original, root) {
   const modified=Buffer.concat([preload,Buffer.from(injection)]);
   new vm.Script(modified.toString(),{filename:'preload.js'});
   archive.files.set('dist/preload.js',modified);
+  for (const native of spec.native || []) {
+    const data = archive.files.get(native.file);
+    if (!data) throw new Error(`Missing native UI source: ${native.file}`);
+    let source = data.toString();
+    for (const {from,to} of native.replacements) {
+      if (source.split(from).length !== 2) throw new Error(`Native UI anchor mismatch: ${native.file}`);
+      source = source.replace(from,to);
+    }
+    new vm.Script(source,{filename:native.file});
+    archive.files.set(native.file,Buffer.from(source));
+  }
   const output=encode(archive), check=decode(output);
   for(const [name,data] of archive.files) if(!check.files.get(name)?.equals(data)) throw new Error(`Repack verification failed: ${name}`);
   return {output,patchVersion:spec.version,originalSha256:sha256(original),patchedSha256:sha256(output)};

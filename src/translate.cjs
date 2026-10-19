@@ -112,7 +112,9 @@ function installTranslation(win, spec) {
       // Ignore dynamic project/workspace/account rows outside the fixed content column.
       for (const el of root.querySelectorAll('.max-w-2xl h1,.max-w-2xl h2,.max-w-2xl h3,.max-w-2xl p,.max-w-2xl a,.max-w-2xl label,.max-w-2xl span:not(.truncate),.max-w-2xl button,.max-w-2xl div')) {
         if (el.querySelector('input,textarea,[contenteditable="true"]')) continue;
-        if (el.closest('.truncate,[data-project-label],.font-mono')) continue;
+        const params = new URL(win.location.href).searchParams;
+        const fixedHeading = el.matches('h1,h2,h3') && !params.has('settingsProjectId') && ['General','App','Appearance','Models','Shortcuts','Provide Feedback'].includes(params.get('settingsScreen') || 'General');
+        if ((el.closest('.truncate') && !fixedHeading) || el.closest('[data-project-label],.font-mono')) continue;
         translateElement(el, spec.settings, ['title'], true);
       }
     }

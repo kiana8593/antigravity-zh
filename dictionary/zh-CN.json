@@ -134,7 +134,7 @@
         "Pinned Conversations": "置顶对话",
         "All conversations": "全部对话"
       },
-      "direct": true
+      "direct": false
     },
     {
       "selector": "[aria-label=\"Sidebar\"] [data-sidebar-section-drop-id] > span.select-none",
@@ -299,7 +299,7 @@
         "No project": "不关联项目"
       },
       "direct": true,
-      "exclude": "[role=\"option\"],[data-testid=\"project-selector-item\"],[data-testid=\"sidecar-model-option\"]"
+      "exclude": "[role=\"option\"],[data-testid=\"project-selector-item\"],[data-testid=\"sidecar-model-option\"],[data-testid=\"new-sidecar-model\"]"
     },
     {
       "selector": "[data-testid=\"cancel-delete-sidecar\"],[data-testid=\"confirm-delete-sidecar\"],[data-testid=\"confirm-delete-conversation\"],[data-testid=\"confirm-delete-mcp\"],[data-testid=\"confirm-delete-skill\"],[data-testid=\"mcp-config-confirm\"],[data-testid=\"declared-permissions-confirm\"]",
@@ -334,6 +334,37 @@
         "title",
         "aria-label"
       ]
+    },
+    {
+      "selector": "[role=\"dialog\"]:has([data-testid=\"new-sidecar-modal\"]) h2,[role=\"dialog\"]:has([data-testid=\"delete-sidecar-modal\"]) h2",
+      "words": {
+        "New Automation": "新建自动化",
+        "New Task": "新建任务",
+        "New Scheduled Task": "新建定时任务",
+        "Delete Task": "删除任务"
+      },
+      "direct": true
+    },
+    {
+      "selector": "[data-testid=\"new-sidecar-modal\"] button,[data-testid=\"new-sidecar-submit\"]",
+      "words": {
+        "Add Automation": "添加自动化",
+        "Add Task": "添加任务",
+        "Add Scheduled Task": "添加定时任务",
+        "Daily": "每天",
+        "Hourly": "每小时",
+        "Weekly": "每周",
+        "Custom": "自定义"
+      },
+      "exclude": "[data-testid=\"new-sidecar-model\"],[data-testid=\"sidecar-model-option\"],[data-testid=\"project-selector-item\"]"
+    },
+    {
+      "selector": "[data-testid=\"new-sidecar-modal\"] div",
+      "words": {
+        "around": "大约在",
+        "on": "在"
+      },
+      "direct": true
     }
   ],
   "settingsNav": {
@@ -531,5 +562,28 @@
     "No results found": "未找到结果",
     "No results": "无结果",
     "Loading...": "正在加载…"
-  }
+  },
+  "native": [
+    {
+      "file": "dist/main.js",
+      "replacements": [
+        {
+          "from": "buttons: ['Cancel', 'Quit']",
+          "to": "buttons: ['取消', '退出']"
+        },
+        {
+          "from": "title: 'Confirm Quit'",
+          "to": "title: '确认退出'"
+        },
+        {
+          "from": "message: 'Are you sure you want to quit?'",
+          "to": "message: '确定要退出吗？'"
+        },
+        {
+          "from": "detail: 'There may be agents or background tasks running.'",
+          "to": "detail: '可能仍有智能体或后台任务正在运行。'"
+        }
+      ]
+    }
+  ]
 }
