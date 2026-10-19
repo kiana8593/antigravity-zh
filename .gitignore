@@ -9,3 +9,11 @@ logs/
 *.log
 *.pem
 *.key
+
+screenshots/
+*.bundle
+*.zip
+*.export
+*.token
+.git-credentials
+.npmrc

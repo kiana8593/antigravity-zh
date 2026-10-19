@@ -1,0 +1,31 @@
+{
+  "name": "antigravity-zh",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Scoped Simplified Chinese UI patch for Antigravity desktop",
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.cjs",
+    "status": "node tools/cli.cjs status",
+    "build": "node tools/cli.cjs build",
+    "install-patch": "node tools/cli.cjs install",
+    "restore": "node tools/cli.cjs restore",
+    "privacy": "node tools/privacy-check.cjs",
+    "package": "node tools/package.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.3"
+  },
+  "license": "MIT",
+  "author": "Antigravity zh contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kiana8593/antigravity-zh.git"
+  },
+  "homepage": "https://github.com/kiana8593/antigravity-zh",
+  "bugs": {
+    "url": "https://github.com/kiana8593/antigravity-zh/issues"
+  }
+}
